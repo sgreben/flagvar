@@ -5,6 +5,7 @@ import (
 	"strings"
 )
 
+// JSON is a `flag.Value` for JSON arguments.
 type JSON struct {
 	Value interface{}
 	Text  string
@@ -20,6 +21,7 @@ func (fv *JSON) String() string {
 	return fv.Text
 }
 
+// JSONs is a `flag.Value` for JSON arguments.
 type JSONs struct {
 	Values []interface{}
 	Texts  []string

@@ -1,5 +1,7 @@
 # flagvar 
 
+[![](https://godoc.org/github.com/sgreben/flagvar?status.svg)](http://godoc.org/github.com/sgreben/flagvar) [![](https://goreportcard.com/badge/github.com/sgreben/flagvar/goreportcard?style=flat-square)](https://goreportcard.com/github.com/sgreben)
+
 A collection of CLI argument types for the `flag` package. 
 
 ## Example
@@ -60,6 +62,7 @@ Here's a compact overview:
 | [Enums](https://godoc.org/github.com/sgreben/flagvar#Enums)       | apple              | []string                             |
 | [EnumSet](https://godoc.org/github.com/sgreben/flagvar#EnumSet)     | apple              | []string                             |
 | [File](https://godoc.org/github.com/sgreben/flagvar#File)        | ./README.md        | string                               |
+| [Files](https://godoc.org/github.com/sgreben/flagvar#Files)        | ./README.md        | string                               |
 | [Floats](https://godoc.org/github.com/sgreben/flagvar#Floats)      | 1.234              | []float64                            |
 | [Glob](https://godoc.org/github.com/sgreben/flagvar#Glob)        | src/**.js          | glob.Glob                            |
 | [Globs](https://godoc.org/github.com/sgreben/flagvar#Globs)       | src/**.js          | glob.Glob                            |
@@ -76,3 +79,4 @@ Here's a compact overview:
 | [URLs](https://godoc.org/github.com/sgreben/flagvar#URLs)        | https://github.com | []*url.URL                           |
 | [Wrap](https://godoc.org/github.com/sgreben/flagvar#Wrap)        |                    |                                      |
 | [WrapFunc](https://godoc.org/github.com/sgreben/flagvar#WrapFunc)    |                    |                                      |
+| [WrapPointer](https://godoc.org/github.com/sgreben/flagvar#WrapPointer)    |                    |                                      |

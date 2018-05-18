@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+// Enum is a `flag.Value` for one-of-a-fixed-set string arguments.
+// The value of the `Choices` field defines the valid choices.
 type Enum struct {
 	Choices []string
 
@@ -26,6 +28,8 @@ func (fv *Enum) String() string {
 	return fv.Value
 }
 
+// Enums is a `flag.Value` for one-of-a-fixed-set string arguments.
+// The value of the `Choices` field defines the valid choices.
 type Enums struct {
 	Choices []string
 
@@ -47,6 +51,9 @@ func (fv *Enums) String() string {
 	return strings.Join(fv.Values, ",")
 }
 
+// EnumSet is a `flag.Value` for one-of-a-fixed-set string arguments.
+// Only distinct values are returned.
+// The value of the `Choices` field defines the valid choices.
 type EnumSet struct {
 	Choices []string
 

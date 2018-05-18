@@ -2,6 +2,7 @@ package flagvar
 
 import "strings"
 
+// Strings is a `flag.Value` for `string` arguments.
 type Strings struct {
 	Values []string
 }
@@ -16,6 +17,8 @@ func (fv *Strings) String() string {
 	return strings.Join(fv.Values, ",")
 }
 
+// StringSet is a `flag.Value` for `string` arguments.
+// Only distinct values are returned.
 type StringSet struct {
 	Value map[string]bool
 }

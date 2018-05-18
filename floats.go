@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+// Floats is a `flag.Value` for float arguments.
+// The `BitSize` field is used for parsing when set.
 type Floats struct {
 	BitSize int
 

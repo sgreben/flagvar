@@ -5,6 +5,8 @@ import (
 	"strings"
 )
 
+// Ints is a `flag.Value` for `int` arguments.
+// The `Base` and `BitSize` fields are used for parsing when set.
 type Ints struct {
 	Base    int
 	BitSize int

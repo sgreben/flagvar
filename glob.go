@@ -7,6 +7,7 @@ import (
 	"github.com/gobwas/glob"
 )
 
+// Glob is a `flag.Value` for glob syntax arguments.
 type Glob struct {
 	Value glob.Glob
 	Text  string
@@ -26,6 +27,7 @@ func (fv *Glob) String() string {
 	return fv.Text
 }
 
+// Globs is a `flag.Value` for glob syntax arguments.
 type Globs struct {
 	Values []glob.Glob
 	Texts  []string

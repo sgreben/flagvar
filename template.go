@@ -5,6 +5,8 @@ import (
 	"text/template"
 )
 
+// Template is a `flag.Value` for `text.Template` arguments.
+// The value of the `Root` field is used as a root template when specified.
 type Template struct {
 	Root *template.Template
 
@@ -29,6 +31,8 @@ func (fv *Template) String() string {
 	return fv.Text
 }
 
+// Templates is a `flag.Value` for `text.Template` arguments.
+// The value of the `Root` field is used as a root template when specified.
 type Templates struct {
 	Root *template.Template
 

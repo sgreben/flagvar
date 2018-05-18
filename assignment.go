@@ -5,11 +5,14 @@ import (
 	"strings"
 )
 
+// KV is a key-value pair of strings
 type KV struct {
 	Key   string
 	Value string
 }
 
+// Assignment is a `flag.Value` for `KEY=VALUE` arguments.
+// The value of the `Separator` field is used instead  of `"="` when set.
 type Assignment struct {
 	Separator string
 
@@ -39,6 +42,8 @@ func (fv *Assignment) String() string {
 	return fv.Text
 }
 
+// Assignments is a `flag.Value` for `KEY=VALUE` arguments.
+// The value of the `Separator` field is used instead  of `"="` when set.
 type Assignments struct {
 	Separator string
 

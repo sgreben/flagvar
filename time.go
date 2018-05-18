@@ -5,6 +5,9 @@ import (
 	"time"
 )
 
+// Time is a `flag.Value` for `time.Time` arguments.
+// The value of the `Layout` field is used for parsing when specified.
+// Otherwise, `time.RFC3339` is used.
 type Time struct {
 	Layout string
 
@@ -14,7 +17,11 @@ type Time struct {
 
 // Set is flag.Value.Set
 func (fv *Time) Set(v string) error {
-	t, err := time.Parse(fv.Layout, v)
+	layout := fv.Layout
+	if layout == "" {
+		layout = time.RFC3339
+	}
+	t, err := time.Parse(layout, v)
 	if err == nil {
 		fv.Text = v
 		fv.Value = t
@@ -26,6 +33,9 @@ func (fv *Time) String() string {
 	return fv.Text
 }
 
+// Times is a `flag.Value` for `time.Time` arguments.
+// The value of the `Layout` field is used for parsing when specified.
+// Otherwise, `time.RFC3339` is used.
 type Times struct {
 	Layout string
 
@@ -35,7 +45,11 @@ type Times struct {
 
 // Set is flag.Value.Set
 func (fv *Times) Set(v string) error {
-	t, err := time.Parse(fv.Layout, v)
+	layout := fv.Layout
+	if layout == "" {
+		layout = time.RFC3339
+	}
+	t, err := time.Parse(layout, v)
 	if err == nil {
 		fv.Texts = append(fv.Texts, v)
 		fv.Values = append(fv.Values, t)
