@@ -4,6 +4,10 @@
 
 A collection of CLI argument types for the `flag` package. 
 
+```go
+import "github.com/sgreben/flagvar"
+```
+
 ## Example
 
 ```go
