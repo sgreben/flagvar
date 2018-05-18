@@ -27,19 +27,16 @@ import (
     "github.com/sgreben/flagvar"
 )
 
+var (
+    fruit    = flagvar.Enum{Choices: []string{"apple","banana"}}
+    urls     flagvar.URLs
+    settings flagvar.Assignments
+)
+
 func main() {
-    var settings flagvar.Assignments // KEY=VALUE assigments
-    var urls flagvar.URLs // valid URLs
-    fruit := flagvar.Enum{ // one of a fixed set of choices
-        Choices: []string{
-            "apple",
-            "melon",
-            "banana",
-        }
-    }
-    flag.Var(&settings, "set", "set key=value")
-    flag.Var(&urls, "url", "add a URL")
     flag.Var(&fruit, "fruit", fmt.Sprintf("set a fruit %v", fruit.Choices))
+    flag.Var(&urls, "url", "add a URL")
+    flag.Var(&settings, "set", "set key=value")
     flag.Parse()
 }
 ```
@@ -52,7 +49,7 @@ $ go run main.go -set abc=xyz -url ://github.com
 invalid value "://github.com" for flag -url: parse ://github.com: missing protocol scheme
 
 $ go run /tmp/main.go -fruit kiwi
-invalid value "kiwi" for flag -fruit: "kiwi" must be one of [apple melon banana]
+invalid value "kiwi" for flag -fruit: "kiwi" must be one of [apple banana]
 ```
 
 ## Conventions
