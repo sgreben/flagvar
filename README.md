@@ -8,6 +8,14 @@ A collection of CLI argument types for the `flag` package.
 import "github.com/sgreben/flagvar"
 ```
 
+<!-- TOC -->
+
+- [Example](#example)
+- [Conventions](#conventions)
+- [Types](#types)
+
+<!-- /TOC -->
+
 ## Example
 
 ```go
