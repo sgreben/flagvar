@@ -1,6 +1,6 @@
 # flagvar 
 
-[![](https://godoc.org/github.com/sgreben/flagvar?status.svg)](http://godoc.org/github.com/sgreben/flagvar) [![](https://goreportcard.com/badge/github.com/sgreben/flagvar/goreportcard?style=flat-square)](https://goreportcard.com/github.com/sgreben)
+[![](https://godoc.org/github.com/sgreben/flagvar?status.svg)](http://godoc.org/github.com/sgreben/flagvar) [![](https://goreportcard.com/badge/github.com/sgreben/flagvar/goreportcard)](https://goreportcard.com/github.com/sgreben) [![](https://gocover.io/_badge/github.com/sgreben/flagvar)](https://gocover.io/github.com/sgreben/flagvar)
 
 A collection of CLI argument types for the `flag` package. 
 
