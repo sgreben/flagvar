@@ -2,6 +2,7 @@ package flagvar
 
 import (
 	"fmt"
+	"sort"
 	"strings"
 )
 
@@ -65,6 +66,7 @@ func (fv *EnumSet) Values() (out []string) {
 	for v := range fv.Value {
 		out = append(out, v)
 	}
+	sort.Strings(out)
 	return
 }
 

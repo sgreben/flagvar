@@ -20,7 +20,7 @@ func (fv *Alternative) Set(v string) error {
 	return nil
 }
 
-func (fv Alternative) String() string {
+func (fv *Alternative) String() string {
 	if fv.EitherOk {
 		return fv.Either.String()
 	}

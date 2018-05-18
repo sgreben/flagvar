@@ -1,6 +1,9 @@
 package flagvar
 
-import "strings"
+import (
+	"sort"
+	"strings"
+)
 
 // Strings is a `flag.Value` for `string` arguments.
 type Strings struct {
@@ -28,6 +31,7 @@ func (fv *StringSet) Values() (out []string) {
 	for v := range fv.Value {
 		out = append(out, v)
 	}
+	sort.Strings(out)
 	return
 }
 
