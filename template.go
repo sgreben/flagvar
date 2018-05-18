@@ -20,7 +20,7 @@ func (fv *Template) Set(v string) error {
 	if root == nil {
 		root = template.New("")
 	}
-	t, err := root.New(fmt.Sprint(fv)).Parse(v)
+	t, err := root.New(fmt.Sprintf("%T(%p)", fv, fv)).Parse(v)
 	if err == nil {
 		fv.Value = t
 	}
@@ -46,7 +46,7 @@ func (fv *Templates) Set(v string) error {
 	if root == nil {
 		root = template.New("")
 	}
-	t, err := root.New(fmt.Sprint(fv)).Parse(v)
+	t, err := root.New(fmt.Sprintf("%T(%p)", fv, fv)).Parse(v)
 	if err == nil {
 		fv.Texts = append(fv.Texts, v)
 		fv.Values = append(fv.Values, t)
