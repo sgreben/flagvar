@@ -57,9 +57,10 @@ invalid value "kiwi" for flag -fruit: "kiwi" must be one of [apple banana]
 ## Conventions
 
 - Pluralized argument types (e.g. `Strings`, `Assignments`) can be specified repeatedly, the values are collected in a slice.
-- -Set types (`EnumSet`, `StringSet`) de-duplicate provided values.
 - The resulting value is stored in `.Value` for singular types and in `.Values` for plural types
 - The original argument string is stored in `.Text` for singular types and in `.Texts` for plural types
+- -Set types (`EnumSet`, `StringSet`) de-duplicate provided values.
+- -CSV types (`IntsCSV`, `EnumsCSV`) accept comma-separated values and accumulate values across flag instances if their `.Accumulate` field is set to `true`.
 
 ## Types
 
@@ -73,13 +74,17 @@ Here's a compact overview:
 | [AssignmentsMap](https://godoc.org/github.com/sgreben/flagvar#AssignmentsMap) | KEY=VALUE          | map[string]string                         |
 | [Enum](https://godoc.org/github.com/sgreben/flagvar#Enum)        | apple              | string                               |
 | [Enums](https://godoc.org/github.com/sgreben/flagvar#Enums)       | apple              | []string                             |
+| [EnumsCSV](https://godoc.org/github.com/sgreben/flagvar#EnumsCSV)       | apple,banana              | []string                             |
 | [EnumSet](https://godoc.org/github.com/sgreben/flagvar#EnumSet)     | apple              | []string                             |
+| [EnumSetCSV](https://godoc.org/github.com/sgreben/flagvar#EnumSetCSV)       | apple,banana              | []string                             |
 | [File](https://godoc.org/github.com/sgreben/flagvar#File)        | ./README.md        | string                               |
 | [Files](https://godoc.org/github.com/sgreben/flagvar#Files)        | ./README.md        | string                               |
 | [Floats](https://godoc.org/github.com/sgreben/flagvar#Floats)      | 1.234              | []float64                            |
+| [FloatsCSV](https://godoc.org/github.com/sgreben/flagvar#FloatsCSV)      | 1.234,5.0              | []float64                            |
 | [Glob](https://godoc.org/github.com/sgreben/flagvar#Glob)        | src/**.js          | glob.Glob                            |
 | [Globs](https://godoc.org/github.com/sgreben/flagvar#Globs)       | src/**.js          | glob.Glob                            |
 | [Ints](https://godoc.org/github.com/sgreben/flagvar#Ints)        | 1002               | []int64                              |
+| [IntsCSV](https://godoc.org/github.com/sgreben/flagvar#IntsCSV)        | 123,1002               | []int64                              |
 | [JSON](https://godoc.org/github.com/sgreben/flagvar#JSON)        | '{"a":1}'          | interface{}                          |
 | [JSONs](https://godoc.org/github.com/sgreben/flagvar#JSONs)       | '{"a":1}'          | []interface{}                        |
 | [Strings](https://godoc.org/github.com/sgreben/flagvar#Strings)     | "xyxy"             | []string                             |

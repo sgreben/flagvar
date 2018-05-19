@@ -60,3 +60,70 @@ func TestIntsFail(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestIntsCSV(t *testing.T) {
+	fv := flagvar.IntsCSV{}
+	var fs flag.FlagSet
+	fs.Var(&fv, "ints-csv", "")
+
+	err := fs.Parse([]string{"-ints-csv", "123,9492"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Values, []int64{123, 9492}) {
+		t.Fail()
+	}
+}
+
+func TestIntsCSVBitSize(t *testing.T) {
+	fv := flagvar.IntsCSV{BitSize: 32}
+	var fs flag.FlagSet
+	fs.Var(&fv, "ints-csv", "")
+
+	err := fs.Parse([]string{"-ints-csv", "123,9492"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Values, []int64{123, 9492}) {
+		t.Fail()
+	}
+}
+
+func TestIntsCSVSeparator(t *testing.T) {
+	fv := flagvar.IntsCSV{Separator: ";"}
+	var fs flag.FlagSet
+	fs.Var(&fv, "ints-csv", "")
+
+	err := fs.Parse([]string{"-ints-csv", "123;9492"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Values, []int64{123, 9492}) {
+		t.Fail()
+	}
+}
+
+func TestIntsCSVAccumulate(t *testing.T) {
+	fv := flagvar.IntsCSV{Accumulate: true}
+	var fs flag.FlagSet
+	fs.Var(&fv, "ints-csv", "")
+
+	err := fs.Parse([]string{"-ints-csv", "123,9492", "-ints-csv", "9492"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Values, []int64{123, 9492, 9492}) {
+		t.Fail()
+	}
+}
+
+func TestIntsCSVFail(t *testing.T) {
+	fv := flagvar.IntsCSV{}
+	var fs flag.FlagSet
+	fs.Var(&fv, "ints-csv", "")
+
+	err := fs.Parse([]string{"-ints-csv", "third"})
+	if err == nil {
+		t.Fail()
+	}
+}

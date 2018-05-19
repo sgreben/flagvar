@@ -31,3 +31,47 @@ func (fv *Floats) Set(v string) error {
 func (fv *Floats) String() string {
 	return strings.Join(fv.Texts, ",")
 }
+
+// FloatsCSV is a `flag.Value` for comma-separated `float` arguments.
+// If `Accumulate` is set, the values of all instances of the flag are accumulated.
+// The `BitSize` fields are used for parsing when set.
+// The `Separator` field is used instead of the comma when set.
+type FloatsCSV struct {
+	BitSize    int
+	Separator  string
+	Accumulate bool
+
+	Values []float64
+	Texts  []string
+}
+
+// Set is flag.Value.Set
+func (fv *FloatsCSV) Set(v string) error {
+	bitSize := fv.BitSize
+	if bitSize == 0 {
+		bitSize = 64
+	}
+	separator := fv.Separator
+	if separator == "" {
+		separator = ","
+	}
+	if !fv.Accumulate {
+		fv.Values = fv.Values[:0]
+		fv.Texts = fv.Texts[:0]
+	}
+	parts := strings.Split(v, separator)
+	for _, part := range parts {
+		part = strings.TrimSpace(part)
+		n, err := strconv.ParseFloat(part, bitSize)
+		if err != nil {
+			return err
+		}
+		fv.Values = append(fv.Values, n)
+		fv.Texts = append(fv.Texts, part)
+	}
+	return nil
+}
+
+func (fv *FloatsCSV) String() string {
+	return strings.Join(fv.Texts, ",")
+}
