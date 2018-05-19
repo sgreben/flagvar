@@ -15,6 +15,7 @@ Or just copy & paste what you need. It's public domain.
 - [Example](#example)
 - [Conventions](#conventions)
 - [Types](#types)
+- [Goals / design principles](#goals--design-principles)
 
 <!-- /TOC -->
 
@@ -98,3 +99,19 @@ Here's a compact overview:
 | [Wrap](https://godoc.org/github.com/sgreben/flagvar#Wrap)        |                    |                                      |
 | [WrapFunc](https://godoc.org/github.com/sgreben/flagvar#WrapFunc)    |                    |                                      |
 | [WrapPointer](https://godoc.org/github.com/sgreben/flagvar#WrapPointer)    |                    |                                      |
+
+## Goals / design principles
+
+- Help avoid dependencies
+    - Self-contained > DRY
+    - Explicitly support copy & paste workflow
+    - Copiable units should be easy to determine
+    - Anonymous structs > shared types
+- "Code-you-own" feeling, even when imported as a package
+    - No private fields / methods
+    - Simple built-in types used wherever possible
+    - Avoid introducing new concepts
+- Support "blind" usage
+    - Zero values should be useful
+    - Avoid introducing failure cases, handle any combination of parameters gracefully.
+    - All "obvious things to try" should work.
