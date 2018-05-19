@@ -82,6 +82,7 @@ func (fv *CIDRsCSV) Set(v string) error {
 	}
 	if !fv.Accumulate {
 		fv.Values = fv.Values[:0]
+		fv.Texts = fv.Texts[:0]
 	}
 	parts := strings.Split(v, separator)
 	for _, part := range parts {
