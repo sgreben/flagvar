@@ -2,12 +2,32 @@ package flagvar_test
 
 import (
 	"flag"
+	"os"
 	"reflect"
+	"strings"
 	"testing"
 	"text/template"
 
 	"github.com/sgreben/flagvar"
 )
+
+func ExampleTemplate() {
+	fv := flagvar.Template{
+		Root: template.New("example").Funcs(template.FuncMap{
+			"toUpper": func(s string) string {
+				return strings.ToUpper(s)
+			},
+		}),
+	}
+	var fs flag.FlagSet
+	fs.Var(&fv, "template", "")
+
+	fs.Parse([]string{"-template", `{{ toUpper "hello, world!" }}`})
+	fv.Value.Execute(os.Stdout, nil)
+
+	// Output:
+	// HELLO, WORLD!
+}
 
 func TestTemplate(t *testing.T) {
 	fv := flagvar.Template{}
