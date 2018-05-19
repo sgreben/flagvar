@@ -8,6 +8,8 @@ A collection of CLI argument types for the `flag` package.
 import "github.com/sgreben/flagvar"
 ```
 
+Or just copy & paste what you need. It's public domain.
+
 <!-- TOC -->
 
 - [Example](#example)
