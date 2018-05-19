@@ -16,11 +16,12 @@ type Glob struct {
 // Set is flag.Value.Set
 func (fv *Glob) Set(v string) error {
 	g, err := glob.Compile(v, filepath.Separator)
-	if err == nil {
-		fv.Text = v
-		fv.Value = g
+	if err != nil {
+		return err
 	}
-	return err
+	fv.Text = v
+	fv.Value = g
+	return nil
 }
 
 func (fv *Glob) String() string {
@@ -36,11 +37,12 @@ type Globs struct {
 // Set is flag.Value.Set
 func (fv *Globs) Set(v string) error {
 	g, err := glob.Compile(v, filepath.Separator)
-	if err == nil {
-		fv.Texts = append(fv.Texts, v)
-		fv.Values = append(fv.Values, g)
+	if err != nil {
+		return err
 	}
-	return err
+	fv.Texts = append(fv.Texts, v)
+	fv.Values = append(fv.Values, g)
+	return nil
 }
 
 func (fv *Globs) String() string {

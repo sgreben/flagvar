@@ -73,6 +73,9 @@ Here's a compact overview:
 | [Assignment](https://godoc.org/github.com/sgreben/flagvar#Assignment)  | KEY=VALUE          | struct{Key,Value} |
 | [Assignments](https://godoc.org/github.com/sgreben/flagvar#Assignments) | KEY=VALUE          | []struct{Key,Value}                         |
 | [AssignmentsMap](https://godoc.org/github.com/sgreben/flagvar#AssignmentsMap) | KEY=VALUE          | map[string]string                         |
+| [CIDR](https://godoc.org/github.com/sgreben/flagvar#CIDR)        | 127.0.0.1/24               | struct{IPNet,IP}                              |
+| [CIDRs](https://godoc.org/github.com/sgreben/flagvar#CIDRs)        | 127.0.0.1/24               | []struct{IPNet,IP}                              |
+| [CIDRsCSV](https://godoc.org/github.com/sgreben/flagvar#CIDRsCSV)        | 127.0.0.1/16,10.1.2.3/8               | []struct{IPNet,IP}                              |
 | [Enum](https://godoc.org/github.com/sgreben/flagvar#Enum)        | apple              | string                               |
 | [Enums](https://godoc.org/github.com/sgreben/flagvar#Enums)       | apple              | []string                             |
 | [EnumsCSV](https://godoc.org/github.com/sgreben/flagvar#EnumsCSV)       | apple,banana              | []string                             |
@@ -86,8 +89,13 @@ Here's a compact overview:
 | [Globs](https://godoc.org/github.com/sgreben/flagvar#Globs)       | src/**.js          | glob.Glob                            |
 | [Ints](https://godoc.org/github.com/sgreben/flagvar#Ints)        | 1002               | []int64                              |
 | [IntsCSV](https://godoc.org/github.com/sgreben/flagvar#IntsCSV)        | 123,1002               | []int64                              |
+| [IP](https://godoc.org/github.com/sgreben/flagvar#IP)        | 127.0.0.1               | net.IP                              |
+| [IPs](https://godoc.org/github.com/sgreben/flagvar#IPs)        | 127.0.0.1               | []net.IP                              |
+| [IPsCSV](https://godoc.org/github.com/sgreben/flagvar#IPsCSV)        | 127.0.0.1,10.1.2.3               | []net.IP                              |
 | [JSON](https://godoc.org/github.com/sgreben/flagvar#JSON)        | '{"a":1}'          | interface{}                          |
 | [JSONs](https://godoc.org/github.com/sgreben/flagvar#JSONs)       | '{"a":1}'          | []interface{}                        |
+| [Regexp](https://godoc.org/github.com/sgreben/flagvar#Regexp)        | [a-z]+          | *regexp.Regexp                            |
+| [Regexps](https://godoc.org/github.com/sgreben/flagvar#Regexps)       | [a-z]+          | []*regexp.Regexp                            |
 | [Strings](https://godoc.org/github.com/sgreben/flagvar#Strings)     | "xyxy"             | []string                             |
 | [StringSet](https://godoc.org/github.com/sgreben/flagvar#StringSet)  | "xyxy"             | []string                             |
 | [Template](https://godoc.org/github.com/sgreben/flagvar#Template)    | "{{.Size}}"        | *template.Template                   |
