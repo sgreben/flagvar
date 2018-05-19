@@ -105,10 +105,11 @@ Here's a compact overview:
 - Help avoid dependencies
     - Self-contained > DRY
     - Explicitly support copy & paste workflow
-    - Copiable units should be easy to determine
+    - Copyable units should be easy to determine
     - Anonymous structs > shared types
 - "Code-you-own" feeling, even when imported as a package
     - No private fields / methods
+    - No magic
     - Simple built-in types used wherever possible
     - Avoid introducing new concepts
 - Support "blind" usage
