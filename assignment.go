@@ -5,19 +5,16 @@ import (
 	"strings"
 )
 
-// KV is a key-value pair of strings
-type KV struct {
-	Key   string
-	Value string
-}
-
 // Assignment is a `flag.Value` for `KEY=VALUE` arguments.
 // The value of the `Separator` field is used instead  of `"="` when set.
 type Assignment struct {
 	Separator string
 
-	Value KV
-	Text  string
+	Value struct {
+		Key   string
+		Value string
+	}
+	Text string
 }
 
 // Set is flag.Value.Set
@@ -31,7 +28,10 @@ func (fv *Assignment) Set(v string) error {
 		return fmt.Errorf(`"%s" must have the form KEY%sVALUE`, v, separator)
 	}
 	fv.Text = v
-	fv.Value = KV{
+	fv.Value = struct {
+		Key   string
+		Value string
+	}{
 		Key:   v[:i],
 		Value: v[i+len(separator):],
 	}
@@ -47,8 +47,11 @@ func (fv *Assignment) String() string {
 type Assignments struct {
 	Separator string
 
-	Values []KV
-	Texts  []string
+	Values []struct {
+		Key   string
+		Value string
+	}
+	Texts []string
 }
 
 // Set is flag.Value.Set
@@ -62,7 +65,10 @@ func (fv *Assignments) Set(v string) error {
 		return fmt.Errorf(`"%s" must have the form KEY%sVALUE`, v, separator)
 	}
 	fv.Texts = append(fv.Texts, v)
-	fv.Values = append(fv.Values, KV{
+	fv.Values = append(fv.Values, struct {
+		Key   string
+		Value string
+	}{
 		Key:   v[:i],
 		Value: v[i+len(separator):],
 	})

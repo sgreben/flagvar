@@ -69,8 +69,8 @@ Here's a compact overview:
 | `flagvar` type | example CLI arg    | type of resulting Go value           |
 |----------------|--------------------|--------------------------------------|
 | [Alternative](https://godoc.org/github.com/sgreben/flagvar#Alternative)  |           |  |
-| [Assignment](https://godoc.org/github.com/sgreben/flagvar#Assignment)  | KEY=VALUE          | KV{Key:"Key", Value:"Value"} |
-| [Assignments](https://godoc.org/github.com/sgreben/flagvar#Assignments) | KEY=VALUE          | []KV                         |
+| [Assignment](https://godoc.org/github.com/sgreben/flagvar#Assignment)  | KEY=VALUE          | struct{Key,Value} |
+| [Assignments](https://godoc.org/github.com/sgreben/flagvar#Assignments) | KEY=VALUE          | []struct{Key,Value}                         |
 | [AssignmentsMap](https://godoc.org/github.com/sgreben/flagvar#AssignmentsMap) | KEY=VALUE          | map[string]string                         |
 | [Enum](https://godoc.org/github.com/sgreben/flagvar#Enum)        | apple              | string                               |
 | [Enums](https://godoc.org/github.com/sgreben/flagvar#Enums)       | apple              | []string                             |

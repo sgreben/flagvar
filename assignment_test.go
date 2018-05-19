@@ -17,7 +17,10 @@ func TestAssignment(t *testing.T) {
 	if err != nil {
 		t.Fail()
 	}
-	if !reflect.DeepEqual(fv.Value, flagvar.KV{Key: "key", Value: "value"}) {
+	if !reflect.DeepEqual(fv.Value, struct {
+		Key   string
+		Value string
+	}{Key: "key", Value: "value"}) {
 		t.Fail()
 	}
 }
@@ -31,7 +34,10 @@ func TestAssignmentSeparator(t *testing.T) {
 	if err != nil {
 		t.Fail()
 	}
-	if !reflect.DeepEqual(fv.Value, flagvar.KV{Key: "key", Value: "value"}) {
+	if !reflect.DeepEqual(fv.Value, struct {
+		Key   string
+		Value string
+	}{Key: "key", Value: "value"}) {
 		t.Fail()
 	}
 }
@@ -56,7 +62,10 @@ func TestAssignments(t *testing.T) {
 	if err != nil {
 		t.Fail()
 	}
-	if !reflect.DeepEqual(fv.Values, []flagvar.KV{{Key: "key", Value: "value"}}) {
+	if !reflect.DeepEqual(fv.Values, []struct {
+		Key   string
+		Value string
+	}{{Key: "key", Value: "value"}}) {
 		t.Fail()
 	}
 }
@@ -70,7 +79,10 @@ func TestAssignmentsSeparator(t *testing.T) {
 	if err != nil {
 		t.Fail()
 	}
-	if !reflect.DeepEqual(fv.Values, []flagvar.KV{{Key: "key", Value: "value"}}) {
+	if !reflect.DeepEqual(fv.Values, []struct {
+		Key   string
+		Value string
+	}{{Key: "key", Value: "value"}}) {
 		t.Fail()
 	}
 }
