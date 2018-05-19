@@ -8,7 +8,15 @@ A collection of CLI argument types for the `flag` package.
 import "github.com/sgreben/flagvar"
 ```
 
-Or just copy & paste what you need. It's public domain.
+Each group of types (`Enum*`, `URL*`, `IP*`, ...) is also available as a separate package (also named `flagvar`), for example:
+
+```go
+import "github.com/sgreben/flagvar/enum"
+
+var enums flagvar.EnumsCSV
+```
+
+Or just copy & paste what you need. It's public domain. 
 
 <!-- TOC -->
 
