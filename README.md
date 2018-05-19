@@ -86,7 +86,7 @@ Here's a compact overview:
 | [Floats](https://godoc.org/github.com/sgreben/flagvar#Floats)      | 1.234              | []float64                            |
 | [FloatsCSV](https://godoc.org/github.com/sgreben/flagvar#FloatsCSV)      | 1.234,5.0              | []float64                            |
 | [Glob](https://godoc.org/github.com/sgreben/flagvar#Glob)        | src/**.js          | glob.Glob                            |
-| [Globs](https://godoc.org/github.com/sgreben/flagvar#Globs)       | src/**.js          | glob.Glob                            |
+| [Globs](https://godoc.org/github.com/sgreben/flagvar#Globs)       | src/**.js          | []glob.Glob                            |
 | [Ints](https://godoc.org/github.com/sgreben/flagvar#Ints)        | 1002               | []int64                              |
 | [IntsCSV](https://godoc.org/github.com/sgreben/flagvar#IntsCSV)        | 123,1002               | []int64                              |
 | [IP](https://godoc.org/github.com/sgreben/flagvar#IP)        | 127.0.0.1               | net.IP                              |
