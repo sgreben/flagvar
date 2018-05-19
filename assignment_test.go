@@ -85,3 +85,42 @@ func TestAssignmentsFail(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestAssignmentsMap(t *testing.T) {
+	var fv flagvar.AssignmentsMap
+	var fs flag.FlagSet
+	fs.Var(&fv, "assignment", "")
+
+	err := fs.Parse([]string{"-assignment", "key=value"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Values, map[string]string{"key": "value"}) {
+		t.Fail()
+	}
+}
+
+func TestAssignmentsMapSeparator(t *testing.T) {
+	fv := flagvar.AssignmentsMap{Separator: ":"}
+	var fs flag.FlagSet
+	fs.Var(&fv, "assignment", "")
+
+	err := fs.Parse([]string{"-assignment", "key:value"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Values, map[string]string{"key": "value"}) {
+		t.Fail()
+	}
+}
+
+func TestAssignmentsMapFail(t *testing.T) {
+	var fv flagvar.AssignmentsMap
+	var fs flag.FlagSet
+	fs.Var(&fv, "assignment", "")
+
+	err := fs.Parse([]string{"-assignment", "keyXvalue"})
+	if err == nil {
+		t.Fail()
+	}
+}

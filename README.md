@@ -68,6 +68,7 @@ Here's a compact overview:
 | [Alternative](https://godoc.org/github.com/sgreben/flagvar#Alternative)  |           |  |
 | [Assignment](https://godoc.org/github.com/sgreben/flagvar#Assignment)  | KEY=VALUE          | KV{Key:"Key", Value:"Value"} |
 | [Assignments](https://godoc.org/github.com/sgreben/flagvar#Assignments) | KEY=VALUE          | []KV                         |
+| [AssignmentsMap](https://godoc.org/github.com/sgreben/flagvar#AssignmentsMap) | KEY=VALUE          | map[string]string                         |
 | [Enum](https://godoc.org/github.com/sgreben/flagvar#Enum)        | apple              | string                               |
 | [Enums](https://godoc.org/github.com/sgreben/flagvar#Enums)       | apple              | []string                             |
 | [EnumSet](https://godoc.org/github.com/sgreben/flagvar#EnumSet)     | apple              | []string                             |
