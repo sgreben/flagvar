@@ -82,7 +82,7 @@ Here's a compact overview:
 | [EnumSet](https://godoc.org/github.com/sgreben/flagvar#EnumSet)     | apple              | []string                             |
 | [EnumSetCSV](https://godoc.org/github.com/sgreben/flagvar#EnumSetCSV)       | apple,banana              | []string                             |
 | [File](https://godoc.org/github.com/sgreben/flagvar#File)        | ./README.md        | string                               |
-| [Files](https://godoc.org/github.com/sgreben/flagvar#Files)        | ./README.md        | string                               |
+| [Files](https://godoc.org/github.com/sgreben/flagvar#Files)        | ./README.md        | []string                               |
 | [Floats](https://godoc.org/github.com/sgreben/flagvar#Floats)      | 1.234              | []float64                            |
 | [FloatsCSV](https://godoc.org/github.com/sgreben/flagvar#FloatsCSV)      | 1.234,5.0              | []float64                            |
 | [Glob](https://godoc.org/github.com/sgreben/flagvar#Glob)        | src/**.js          | glob.Glob                            |
