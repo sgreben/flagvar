@@ -2,7 +2,10 @@ package flagvar_test
 
 import (
 	"flag"
+	"fmt"
 	"reflect"
+	"sort"
+	"strings"
 	"testing"
 
 	"github.com/sgreben/flagvar"
@@ -61,6 +64,89 @@ func TestWrap(t *testing.T) {
 		t.Fail()
 	}
 	if updated != 2 {
+		t.Fail()
+	}
+}
+
+func TestWrapCSV(t *testing.T) {
+	sv := &flagvar.Strings{}
+	fv := flagvar.WrapCSV{Value: sv}
+	var fs flag.FlagSet
+	fs.Var(&fv, "wrap-csv", "")
+
+	err := fs.Parse([]string{"-wrap-csv", "abc,def", "-wrap-csv", "xyz"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(sv.Values, []string{"abc", "def", "xyz"}) {
+		t.Fail()
+	}
+}
+
+func TestWrapCSVFail(t *testing.T) {
+	sv := &flagvar.IP{}
+	fv := flagvar.WrapCSV{Value: sv}
+	var fs flag.FlagSet
+	fs.Var(&fv, "wrap-csv", "")
+
+	err := fs.Parse([]string{"-wrap-csv", "127.0.0.1,def"})
+	if err == nil {
+		t.Fail()
+	}
+}
+
+func TestWrapCSVSeparator(t *testing.T) {
+	sv := &flagvar.Strings{}
+	fv := flagvar.WrapCSV{
+		Value:     sv,
+		Separator: ";",
+	}
+	var fs flag.FlagSet
+	fs.Var(&fv, "wrap-csv", "")
+
+	err := fs.Parse([]string{"-wrap-csv", "abc;def", "-wrap-csv", "xyz"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(sv.Values, []string{"abc", "def", "xyz"}) {
+		t.Fail()
+	}
+}
+
+func TestWrapCSVUpdated(t *testing.T) {
+	sv := &flagvar.Assignment{}
+	current := map[string]string{}
+	final := map[string]string{}
+	fv := flagvar.WrapCSV{
+		Value: sv,
+		UpdatedOne: func() {
+			current[sv.Value.Key] = sv.Value.Value
+		},
+		UpdatedAll: func() {
+			final = current
+			current = map[string]string{}
+		},
+		StringFunc: func() string {
+			var out []string
+			for k, v := range final {
+				out = append(out, fmt.Sprintf("%s=%s", k, v))
+			}
+			sort.Strings(out)
+			return strings.Join(out, ",")
+		},
+	}
+	var fs flag.FlagSet
+	fs.Var(&fv, "wrap-csv", "")
+
+	err := fs.Parse([]string{"-wrap-csv", "xyz=abc", "-wrap-csv", "abc=def,def=xyz"})
+	if err != nil {
+		t.Fail()
+	}
+	fmt.Println(final)
+	if !reflect.DeepEqual(final, map[string]string{"abc": "def", "def": "xyz"}) {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.String(), `abc=def,def=xyz`) {
 		t.Fail()
 	}
 }

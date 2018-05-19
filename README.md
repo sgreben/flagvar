@@ -105,6 +105,7 @@ Here's a compact overview:
 | [URL](https://godoc.org/github.com/sgreben/flagvar#URL)         | https://github.com | *url.URL                             |
 | [URLs](https://godoc.org/github.com/sgreben/flagvar#URLs)        | https://github.com | []*url.URL                           |
 | [Wrap](https://godoc.org/github.com/sgreben/flagvar#Wrap)        |                    |                                      |
+| [WrapCSV](https://godoc.org/github.com/sgreben/flagvar#WrapCSV)        |                    |                                      |
 | [WrapFunc](https://godoc.org/github.com/sgreben/flagvar#WrapFunc)    |                    |                                      |
 | [WrapPointer](https://godoc.org/github.com/sgreben/flagvar#WrapPointer)    |                    |                                      |
 

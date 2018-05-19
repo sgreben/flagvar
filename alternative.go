@@ -24,5 +24,8 @@ func (fv *Alternative) String() string {
 	if fv.EitherOk {
 		return fv.Either.String()
 	}
-	return fv.Or.String()
+	if fv.Or != nil {
+		return fv.Or.String()
+	}
+	return ""
 }
