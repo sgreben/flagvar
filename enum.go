@@ -8,16 +8,22 @@ import (
 
 // Enum is a `flag.Value` for one-of-a-fixed-set string arguments.
 // The value of the `Choices` field defines the valid choices.
+// If `CaseSensitive` is set to `true` (default `false`), the comparison is case-sensitive.
 type Enum struct {
-	Choices []string
+	Choices       []string
+	CaseSensitive bool
 
 	Value string
 }
 
 // Set is flag.Value.Set
 func (fv *Enum) Set(v string) error {
+	equal := strings.EqualFold
+	if fv.CaseSensitive {
+		equal = func(a, b string) bool { return a == b }
+	}
 	for _, c := range fv.Choices {
-		if strings.EqualFold(c, v) {
+		if equal(c, v) {
 			fv.Value = c
 			return nil
 		}
@@ -31,16 +37,22 @@ func (fv *Enum) String() string {
 
 // Enums is a `flag.Value` for one-of-a-fixed-set string arguments.
 // The value of the `Choices` field defines the valid choices.
+// If `CaseSensitive` is set to `true` (default `false`), the comparison is case-sensitive.
 type Enums struct {
-	Choices []string
+	Choices       []string
+	CaseSensitive bool
 
 	Values []string
 }
 
 // Set is flag.Value.Set
 func (fv *Enums) Set(v string) error {
+	equal := strings.EqualFold
+	if fv.CaseSensitive {
+		equal = func(a, b string) bool { return a == b }
+	}
 	for _, c := range fv.Choices {
-		if strings.EqualFold(c, v) {
+		if equal(c, v) {
 			fv.Values = append(fv.Values, c)
 			return nil
 		}
@@ -56,16 +68,22 @@ func (fv *Enums) String() string {
 // The value of the `Choices` field defines the valid choices.
 // If `Accumulate` is set, the values of all instances of the flag are accumulated.
 // The `Separator` field is used instead of the comma when set.
+// If `CaseSensitive` is set to `true` (default `false`), the comparison is case-sensitive.
 type EnumsCSV struct {
-	Choices    []string
-	Separator  string
-	Accumulate bool
+	Choices       []string
+	Separator     string
+	Accumulate    bool
+	CaseSensitive bool
 
 	Values []string
 }
 
 // Set is flag.Value.Set
 func (fv *EnumsCSV) Set(v string) error {
+	equal := strings.EqualFold
+	if fv.CaseSensitive {
+		equal = func(a, b string) bool { return a == b }
+	}
 	separator := fv.Separator
 	if separator == "" {
 		separator = ","
@@ -79,7 +97,7 @@ func (fv *EnumsCSV) Set(v string) error {
 		var ok bool
 		var value string
 		for _, c := range fv.Choices {
-			if strings.EqualFold(c, part) {
+			if equal(c, part) {
 				value = c
 				ok = true
 				break
@@ -100,8 +118,10 @@ func (fv *EnumsCSV) String() string {
 // EnumSet is a `flag.Value` for one-of-a-fixed-set string arguments.
 // Only distinct values are returned.
 // The value of the `Choices` field defines the valid choices.
+// If `CaseSensitive` is set to `true` (default `false`), the comparison is case-sensitive.
 type EnumSet struct {
-	Choices []string
+	Choices       []string
+	CaseSensitive bool
 
 	Value map[string]bool
 }
@@ -117,9 +137,13 @@ func (fv *EnumSet) Values() (out []string) {
 
 // Set is flag.Value.Set
 func (fv *EnumSet) Set(v string) error {
+	equal := strings.EqualFold
+	if fv.CaseSensitive {
+		equal = func(a, b string) bool { return a == b }
+	}
 	var ok bool
 	for _, c := range fv.Choices {
-		if strings.EqualFold(c, v) {
+		if equal(c, v) {
 			v = c
 			ok = true
 			break
@@ -144,10 +168,12 @@ func (fv *EnumSet) String() string {
 // The value of the `Choices` field defines the valid choices.
 // If `Accumulate` is set, the values of all instances of the flag are accumulated.
 // The `Separator` field is used instead of the comma when set.
+// If `CaseSensitive` is set to `true` (default `false`), the comparison is case-sensitive.
 type EnumSetCSV struct {
-	Choices    []string
-	Separator  string
-	Accumulate bool
+	Choices       []string
+	Separator     string
+	Accumulate    bool
+	CaseSensitive bool
 
 	Value map[string]bool
 }
@@ -163,6 +189,10 @@ func (fv *EnumSetCSV) Values() (out []string) {
 
 // Set is flag.Value.Set
 func (fv *EnumSetCSV) Set(v string) error {
+	equal := strings.EqualFold
+	if fv.CaseSensitive {
+		equal = func(a, b string) bool { return a == b }
+	}
 	separator := fv.Separator
 	if separator == "" {
 		separator = ","
@@ -176,7 +206,7 @@ func (fv *EnumSetCSV) Set(v string) error {
 		var ok bool
 		var value string
 		for _, c := range fv.Choices {
-			if strings.EqualFold(c, part) {
+			if equal(c, part) {
 				value = c
 				ok = true
 				break
