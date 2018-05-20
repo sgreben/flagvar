@@ -1,6 +1,7 @@
 package flagvar
 
 import (
+	"fmt"
 	"strings"
 
 	"net"
@@ -13,6 +14,11 @@ type UnixAddr struct {
 
 	Value *net.UnixAddr
 	Text  string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *UnixAddr) Help() string {
+	return "a UNIX domain socket address"
 }
 
 // Set is flag.Value.Set
@@ -41,6 +47,11 @@ type UnixAddrs struct {
 
 	Values []*net.UnixAddr
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *UnixAddrs) Help() string {
+	return "a UNIX domain socket address"
 }
 
 // Set is flag.Value.Set
@@ -73,6 +84,15 @@ type UnixAddrsCSV struct {
 
 	Values []*net.UnixAddr
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *UnixAddrsCSV) Help() string {
+	separator := ","
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	return fmt.Sprintf("%q-separated list of UNIX domain socket addresses", separator)
 }
 
 // Set is flag.Value.Set

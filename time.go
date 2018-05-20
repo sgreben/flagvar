@@ -1,6 +1,7 @@
 package flagvar
 
 import (
+	"fmt"
 	"strings"
 	"time"
 )
@@ -13,6 +14,15 @@ type Time struct {
 
 	Value time.Time
 	Text  string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Time) Help() string {
+	layout := time.RFC3339
+	if fv.Layout != "" {
+		layout = fv.Layout
+	}
+	return fmt.Sprintf("a time, e.g. %s", layout)
 }
 
 // Set is flag.Value.Set
@@ -41,6 +51,15 @@ type Times struct {
 
 	Values []time.Time
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Times) Help() string {
+	layout := time.RFC3339
+	if fv.Layout != "" {
+		layout = fv.Layout
+	}
+	return fmt.Sprintf("a time, e.g. %s", layout)
 }
 
 // Set is flag.Value.Set

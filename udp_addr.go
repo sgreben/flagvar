@@ -1,6 +1,7 @@
 package flagvar
 
 import (
+	"fmt"
 	"strings"
 
 	"net"
@@ -13,6 +14,11 @@ type UDPAddr struct {
 
 	Value *net.UDPAddr
 	Text  string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *UDPAddr) Help() string {
+	return "a UDP address"
 }
 
 // Set is flag.Value.Set
@@ -41,6 +47,11 @@ type UDPAddrs struct {
 
 	Values []*net.UDPAddr
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *UDPAddrs) Help() string {
+	return "a UDP address"
 }
 
 // Set is flag.Value.Set
@@ -73,6 +84,15 @@ type UDPAddrsCSV struct {
 
 	Values []*net.UDPAddr
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *UDPAddrsCSV) Help() string {
+	separator := ","
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	return fmt.Sprintf("%q-separated list of UDP addresses", separator)
 }
 
 // Set is flag.Value.Set

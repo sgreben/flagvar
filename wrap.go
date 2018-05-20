@@ -2,6 +2,7 @@ package flagvar
 
 import (
 	"flag"
+	"fmt"
 	"strings"
 )
 
@@ -9,6 +10,17 @@ import (
 // This can be used to switch between different argument parsers.
 type WrapPointer struct {
 	Value *flag.Value
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *WrapPointer) Help() string {
+	if fv.Value == nil {
+		return ""
+	}
+	if helper, ok := (*fv.Value).(interface{ Help() string }); ok {
+		return helper.Help()
+	}
+	return ""
 }
 
 // Set is flag.Value.Set
@@ -27,6 +39,17 @@ func (fv WrapPointer) String() string {
 // This can be used to switch between different argument parsers.
 type WrapFunc func() flag.Value
 
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv WrapFunc) Help() string {
+	if fv == nil {
+		return ""
+	}
+	if helper, ok := fv().(interface{ Help() string }); ok {
+		return helper.Help()
+	}
+	return ""
+}
+
 // Set is flag.Value.Set
 func (fv WrapFunc) Set(v string) error {
 	return fv().Set(v)
@@ -43,6 +66,17 @@ func (fv WrapFunc) String() string {
 type Wrap struct {
 	Value   flag.Value
 	Updated func()
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Wrap) Help() string {
+	if fv.Value == nil {
+		return ""
+	}
+	if helper, ok := (fv.Value).(interface{ Help() string }); ok {
+		return helper.Help()
+	}
+	return ""
 }
 
 // Set is flag.Value.Set
@@ -69,6 +103,21 @@ type WrapCSV struct {
 	UpdatedOne func()
 	UpdatedAll func()
 	StringFunc func() string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *WrapCSV) Help() string {
+	if fv.Value == nil {
+		return ""
+	}
+	separator := fv.Separator
+	if separator == "" {
+		separator = ","
+	}
+	if helper, ok := (fv.Value).(interface{ Help() string }); ok {
+		return fmt.Sprintf("%q-separated values, each value %s", separator, helper.Help())
+	}
+	return ""
 }
 
 // Set is flag.Value.Set

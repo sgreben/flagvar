@@ -1,6 +1,7 @@
 package flagvar
 
 import (
+	"fmt"
 	"strings"
 
 	"net"
@@ -13,6 +14,11 @@ type TCPAddr struct {
 
 	Value *net.TCPAddr
 	Text  string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *TCPAddr) Help() string {
+	return "a TCP address"
 }
 
 // Set is flag.Value.Set
@@ -41,6 +47,11 @@ type TCPAddrs struct {
 
 	Values []*net.TCPAddr
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *TCPAddrs) Help() string {
+	return "a TCP address"
 }
 
 // Set is flag.Value.Set
@@ -73,6 +84,15 @@ type TCPAddrsCSV struct {
 
 	Values []*net.TCPAddr
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *TCPAddrsCSV) Help() string {
+	separator := ","
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	return fmt.Sprintf("%q-separated list of TCP addresses", separator)
 }
 
 // Set is flag.Value.Set

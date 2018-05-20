@@ -14,10 +14,20 @@ type Enum struct {
 	CaseSensitive bool
 
 	Value string
+	Text  string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Enum) Help() string {
+	if fv.CaseSensitive {
+		return fmt.Sprintf("one of %v (case-sensitive)", fv.Choices)
+	}
+	return fmt.Sprintf("one of %v", fv.Choices)
 }
 
 // Set is flag.Value.Set
 func (fv *Enum) Set(v string) error {
+	fv.Text = v
 	equal := strings.EqualFold
 	if fv.CaseSensitive {
 		equal = func(a, b string) bool { return a == b }
@@ -43,6 +53,15 @@ type Enums struct {
 	CaseSensitive bool
 
 	Values []string
+	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Enums) Help() string {
+	if fv.CaseSensitive {
+		return fmt.Sprintf("one of %v (case-sensitive)", fv.Choices)
+	}
+	return fmt.Sprintf("one of %v", fv.Choices)
 }
 
 // Set is flag.Value.Set
@@ -54,6 +73,7 @@ func (fv *Enums) Set(v string) error {
 	for _, c := range fv.Choices {
 		if equal(c, v) {
 			fv.Values = append(fv.Values, c)
+			fv.Texts = append(fv.Texts, v)
 			return nil
 		}
 	}
@@ -76,6 +96,19 @@ type EnumsCSV struct {
 	CaseSensitive bool
 
 	Values []string
+	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *EnumsCSV) Help() string {
+	separator := ","
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	if fv.CaseSensitive {
+		return fmt.Sprintf("%q-separated list of values from %v (case-sensitive)", separator, fv.Choices)
+	}
+	return fmt.Sprintf("%q-separated list of values from %v", separator, fv.Choices)
 }
 
 // Set is flag.Value.Set
@@ -107,6 +140,7 @@ func (fv *EnumsCSV) Set(v string) error {
 			return fmt.Errorf(`"%s" must be one of [%s]`, v, strings.Join(fv.Choices, " "))
 		}
 		fv.Values = append(fv.Values, value)
+		fv.Texts = append(fv.Texts, part)
 	}
 	return nil
 }
@@ -124,6 +158,15 @@ type EnumSet struct {
 	CaseSensitive bool
 
 	Value map[string]bool
+	Texts []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *EnumSet) Help() string {
+	if fv.CaseSensitive {
+		return fmt.Sprintf("one of %v (case-sensitive)", fv.Choices)
+	}
+	return fmt.Sprintf("one of %v", fv.Choices)
 }
 
 // Values returns a string slice of specified values.
@@ -156,6 +199,7 @@ func (fv *EnumSet) Set(v string) error {
 		fv.Value = make(map[string]bool)
 	}
 	fv.Value[v] = true
+	fv.Texts = append(fv.Texts, v)
 	return nil
 }
 
@@ -176,6 +220,19 @@ type EnumSetCSV struct {
 	CaseSensitive bool
 
 	Value map[string]bool
+	Texts []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *EnumSetCSV) Help() string {
+	separator := ","
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	if fv.CaseSensitive {
+		return fmt.Sprintf("%q-separated list of values from %v (case-sensitive)", separator, fv.Choices)
+	}
+	return fmt.Sprintf("%q-separated list of values from %v", separator, fv.Choices)
 }
 
 // Values returns a string slice of specified values.
@@ -216,6 +273,7 @@ func (fv *EnumSetCSV) Set(v string) error {
 			return fmt.Errorf(`"%s" must be one of [%s]`, v, strings.Join(fv.Choices, " "))
 		}
 		fv.Value[value] = true
+		fv.Texts = append(fv.Texts, part)
 	}
 	return nil
 }

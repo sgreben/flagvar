@@ -11,6 +11,11 @@ type JSON struct {
 	Text  string
 }
 
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *JSON) Help() string {
+	return "a JSON value"
+}
+
 // Set is flag.Value.Set
 func (fv *JSON) Set(v string) error {
 	fv.Text = v
@@ -25,6 +30,11 @@ func (fv *JSON) String() string {
 type JSONs struct {
 	Values []interface{}
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *JSONs) Help() string {
+	return "a JSON value"
 }
 
 // Set is flag.Value.Set

@@ -14,6 +14,11 @@ type Template struct {
 	Text  string
 }
 
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Template) Help() string {
+	return "a go template"
+}
+
 // Set is flag.Value.Set
 func (fv *Template) Set(v string) error {
 	root := fv.Root
@@ -38,6 +43,11 @@ type Templates struct {
 
 	Values []*template.Template
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Templates) Help() string {
+	return "a go template"
 }
 
 // Set is flag.Value.Set

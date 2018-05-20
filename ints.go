@@ -1,6 +1,7 @@
 package flagvar
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -13,6 +14,21 @@ type Ints struct {
 
 	Values []int64
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Ints) Help() string {
+	var base, bitSize string
+	if fv.Base != 0 {
+		base = fmt.Sprintf("base %d ", fv.Base)
+	}
+	if fv.BitSize != 0 {
+		bitSize = fmt.Sprintf("%d-bit ", fv.BitSize)
+	}
+	if base != "" || bitSize != "" {
+		return fmt.Sprintf("a %s%sinteger", bitSize, base)
+	}
+	return "an integer"
 }
 
 // Set is flag.Value.Set
@@ -49,6 +65,22 @@ type IntsCSV struct {
 
 	Values []int64
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *IntsCSV) Help() string {
+	var base, bitSize string
+	if fv.Base != 0 {
+		base = fmt.Sprintf("base %d ", fv.Base)
+	}
+	if fv.BitSize != 0 {
+		bitSize = fmt.Sprintf("%d-bit ", fv.BitSize)
+	}
+	separator := ","
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	return fmt.Sprintf("%q-separated list of %s%sintegers", separator, bitSize, base)
 }
 
 // Set is flag.Value.Set

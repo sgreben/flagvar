@@ -13,6 +13,11 @@ type IP struct {
 	Text  string
 }
 
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *IP) Help() string {
+	return "an IP address"
+}
+
 // Set is flag.Value.Set
 func (fv *IP) Set(v string) error {
 	ip := net.ParseIP(v)
@@ -32,6 +37,11 @@ func (fv *IP) String() string {
 type IPs struct {
 	Values []net.IP
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *IPs) Help() string {
+	return "an IP address"
 }
 
 // Set is flag.Value.Set
@@ -58,6 +68,15 @@ type IPsCSV struct {
 
 	Values []net.IP
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *IPsCSV) Help() string {
+	separator := ","
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	return fmt.Sprintf("%q-separated list of IP addresses", separator)
 }
 
 // Set is flag.Value.Set

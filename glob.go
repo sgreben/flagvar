@@ -1,6 +1,7 @@
 package flagvar
 
 import (
+	"fmt"
 	"path/filepath"
 	"strings"
 
@@ -16,6 +17,21 @@ type Glob struct {
 
 	Value glob.Glob
 	Text  string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Glob) Help() string {
+	separators := []rune{filepath.Separator}
+	if fv.Separators != nil {
+		separators = *fv.Separators
+	}
+	if len(separators) == 0 {
+		return "a glob expression"
+	}
+	if len(separators) == 1 {
+		return fmt.Sprintf("a glob expression with separator %q", separators[0])
+	}
+	return fmt.Sprintf("a glob expression with separators %q", separators)
 }
 
 // Set is flag.Value.Set
@@ -46,6 +62,21 @@ type Globs struct {
 
 	Values []glob.Glob
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Globs) Help() string {
+	separators := []rune{filepath.Separator}
+	if fv.Separators != nil {
+		separators = *fv.Separators
+	}
+	if len(separators) == 0 {
+		return "a glob expression"
+	}
+	if len(separators) == 1 {
+		return fmt.Sprintf("a glob expression with separator %q", separators[0])
+	}
+	return fmt.Sprintf("a glob expression with separators %q", separators)
 }
 
 // Set is flag.Value.Set

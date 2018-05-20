@@ -14,6 +14,14 @@ type Regexp struct {
 	Text  string
 }
 
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Regexp) Help() string {
+	if fv.POSIX {
+		return "a POSIX regular expression"
+	}
+	return "a regular expression"
+}
+
 // Set is flag.Value.Set
 func (fv *Regexp) Set(v string) error {
 	var err error
@@ -41,6 +49,14 @@ type Regexps struct {
 
 	Values []*regexp.Regexp
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Regexps) Help() string {
+	if fv.POSIX {
+		return "a POSIX regular expression"
+	}
+	return "a regular expression"
 }
 
 // Set is flag.Value.Set

@@ -1,6 +1,7 @@
 package flagvar
 
 import (
+	"fmt"
 	"strings"
 
 	"net"
@@ -13,6 +14,11 @@ type CIDR struct {
 		IP    net.IP
 	}
 	Text string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *CIDR) Help() string {
+	return "a CIDR notation IP address and prefix length"
 }
 
 // Set is flag.Value.Set
@@ -40,6 +46,11 @@ type CIDRs struct {
 		IP    net.IP
 	}
 	Texts []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *CIDRs) Help() string {
+	return "a CIDR notation IP address and prefix length"
 }
 
 // Set is flag.Value.Set
@@ -74,11 +85,20 @@ type CIDRsCSV struct {
 	Texts []string
 }
 
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *CIDRsCSV) Help() string {
+	separator := ","
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	return fmt.Sprintf("%q-separated list of CIDR notation IP addresses/prefix lengths", separator)
+}
+
 // Set is flag.Value.Set
 func (fv *CIDRsCSV) Set(v string) error {
-	separator := fv.Separator
-	if separator == "" {
-		separator = ","
+	separator := ","
+	if fv.Separator != "" {
+		separator = fv.Separator
 	}
 	if !fv.Accumulate {
 		fv.Values = fv.Values[:0]

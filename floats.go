@@ -1,6 +1,7 @@
 package flagvar
 
 import (
+	"fmt"
 	"strconv"
 	"strings"
 )
@@ -12,6 +13,15 @@ type Floats struct {
 
 	Values []float64
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Floats) Help() string {
+	var bitSize string
+	if fv.BitSize != 0 {
+		bitSize = fmt.Sprintf("%d-bit ", fv.BitSize)
+	}
+	return fmt.Sprintf("a %sfloat", bitSize)
 }
 
 // Set is flag.Value.Set
@@ -43,6 +53,19 @@ type FloatsCSV struct {
 
 	Values []float64
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *FloatsCSV) Help() string {
+	var bitSize string
+	if fv.BitSize != 0 {
+		bitSize = fmt.Sprintf("%d-bit ", fv.BitSize)
+	}
+	separator := ","
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	return fmt.Sprintf("%q-separated list of %sfloats", separator, bitSize)
 }
 
 // Set is flag.Value.Set

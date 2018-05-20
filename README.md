@@ -70,6 +70,7 @@ invalid value "kiwi" for flag -fruit: "kiwi" must be one of [apple banana]
 - The original argument string is stored in `.Text` for singular types and in `.Texts` for plural types
 - -Set types (`EnumSet`, `StringSet`) de-duplicate provided values.
 - -CSV types (`IntsCSV`, `EnumsCSV`) accept comma-separated values and accumulate values across flag instances if their `.Accumulate` field is set to `true`.
+- Most types implement `interface{ Help() string }`, which produces a string suitable for inclusion in a help message.
 
 ## Types
 

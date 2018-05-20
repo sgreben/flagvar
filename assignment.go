@@ -17,6 +17,15 @@ type Assignment struct {
 	Text string
 }
 
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Assignment) Help() string {
+	separator := "="
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	return fmt.Sprintf("a key/value pair KEY%sVALUE", separator)
+}
+
 // Set is flag.Value.Set
 func (fv *Assignment) Set(v string) error {
 	separator := "="
@@ -54,6 +63,15 @@ type Assignments struct {
 	Texts []string
 }
 
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *Assignments) Help() string {
+	separator := "="
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	return fmt.Sprintf("a key/value pair KEY%sVALUE", separator)
+}
+
 // Set is flag.Value.Set
 func (fv *Assignments) Set(v string) error {
 	separator := "="
@@ -86,6 +104,15 @@ type AssignmentsMap struct {
 
 	Values map[string]string
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *AssignmentsMap) Help() string {
+	separator := "="
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	return fmt.Sprintf("a key/value pair KEY%sVALUE", separator)
 }
 
 // Set is flag.Value.Set

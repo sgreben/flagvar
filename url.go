@@ -11,6 +11,11 @@ type URL struct {
 	Text  string
 }
 
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *URL) Help() string {
+	return "a URL"
+}
+
 // Set is flag.Value.Set
 func (fv *URL) Set(v string) error {
 	u, err := url.Parse(v)
@@ -29,6 +34,11 @@ func (fv *URL) String() string {
 type URLs struct {
 	Values []*url.URL
 	Texts  []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *URLs) Help() string {
+	return "a URL"
 }
 
 // Set is flag.Value.Set
