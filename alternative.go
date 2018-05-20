@@ -16,8 +16,12 @@ type Alternative struct {
 // Help returns a string suitable for inclusion in a flag help message.
 func (fv *Alternative) Help() string {
 	if fv.Either != nil && fv.Or != nil {
-		if eitherHelp, ok := fv.Either.(interface{ Help() string }); ok {
-			if orHelp, ok := fv.Or.(interface{ Help() string }); ok {
+		if eitherHelp, ok := fv.Either.(interface {
+			Help() string
+		}); ok {
+			if orHelp, ok := fv.Or.(interface {
+				Help() string
+			}); ok {
 				return fmt.Sprintf("either %s, or %s", eitherHelp.Help(), orHelp.Help())
 			}
 		}

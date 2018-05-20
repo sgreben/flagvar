@@ -17,7 +17,9 @@ func (fv *WrapPointer) Help() string {
 	if fv.Value == nil {
 		return ""
 	}
-	if helper, ok := (*fv.Value).(interface{ Help() string }); ok {
+	if helper, ok := (*fv.Value).(interface {
+		Help() string
+	}); ok {
 		return helper.Help()
 	}
 	return ""
@@ -44,7 +46,9 @@ func (fv WrapFunc) Help() string {
 	if fv == nil {
 		return ""
 	}
-	if helper, ok := fv().(interface{ Help() string }); ok {
+	if helper, ok := fv().(interface {
+		Help() string
+	}); ok {
 		return helper.Help()
 	}
 	return ""
@@ -73,7 +77,9 @@ func (fv *Wrap) Help() string {
 	if fv.Value == nil {
 		return ""
 	}
-	if helper, ok := fv.Value.(interface{ Help() string }); ok {
+	if helper, ok := fv.Value.(interface {
+		Help() string
+	}); ok {
 		return helper.Help()
 	}
 	return ""
@@ -114,7 +120,9 @@ func (fv *WrapCSV) Help() string {
 	if separator == "" {
 		separator = ","
 	}
-	if helper, ok := fv.Value.(interface{ Help() string }); ok {
+	if helper, ok := fv.Value.(interface {
+		Help() string
+	}); ok {
 		return fmt.Sprintf("%q-separated values, each value %s", separator, helper.Help())
 	}
 	return ""
