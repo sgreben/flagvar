@@ -29,7 +29,7 @@ func (fv *WrapPointer) Set(v string) error {
 }
 
 func (fv WrapPointer) String() string {
-	if fv.Value == nil || (*fv.Value) == nil {
+	if fv.Value == nil || *fv.Value == nil {
 		return ""
 	}
 	return (*fv.Value).String()

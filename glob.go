@@ -40,7 +40,7 @@ func (fv *Glob) Set(v string) error {
 	if separators == nil {
 		separators = &[]rune{filepath.Separator}
 	}
-	g, err := glob.Compile(v, (*separators)...)
+	g, err := glob.Compile(v, *separators...)
 	if err != nil {
 		return err
 	}
@@ -85,7 +85,7 @@ func (fv *Globs) Set(v string) error {
 	if separators == nil {
 		separators = &[]rune{filepath.Separator}
 	}
-	g, err := glob.Compile(v, (*separators)...)
+	g, err := glob.Compile(v, *separators...)
 	if err != nil {
 		return err
 	}
