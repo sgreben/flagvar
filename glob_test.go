@@ -24,6 +24,34 @@ func TestGlob(t *testing.T) {
 	}
 }
 
+func TestGlobNoSeparators(t *testing.T) {
+	fv := flagvar.Glob{Separators: &[]rune{}}
+	var fs flag.FlagSet
+	fs.Var(&fv, "glob", "")
+
+	err := fs.Parse([]string{"-glob", "**.go"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Value, glob.MustCompile("**.go")) {
+		t.Fail()
+	}
+}
+
+func TestGlobSeparators(t *testing.T) {
+	fv := flagvar.Glob{Separators: &[]rune{';'}}
+	var fs flag.FlagSet
+	fs.Var(&fv, "glob", "")
+
+	err := fs.Parse([]string{"-glob", "**.go"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Value, glob.MustCompile("**.go")) {
+		t.Fail()
+	}
+}
+
 func TestGlobFail(t *testing.T) {
 	fv := flagvar.Glob{}
 	var fs flag.FlagSet

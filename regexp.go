@@ -6,14 +6,23 @@ import (
 )
 
 // Regexp is a `flag.Value` for regular expression arguments.
+// If `POSIX` is set to true, `regexp.CompilePOSIX` is used instead of `regexp.Compile`.
 type Regexp struct {
+	POSIX bool
+
 	Value *regexp.Regexp
 	Text  string
 }
 
 // Set is flag.Value.Set
 func (fv *Regexp) Set(v string) error {
-	re, err := regexp.Compile(v)
+	var err error
+	var re *regexp.Regexp
+	if fv.POSIX {
+		re, err = regexp.CompilePOSIX(v)
+	} else {
+		re, err = regexp.Compile(v)
+	}
 	if err != nil {
 		return err
 	}
@@ -28,13 +37,21 @@ func (fv *Regexp) String() string {
 
 // Regexps is a `flag.Value` for regular expression arguments.
 type Regexps struct {
+	POSIX bool
+
 	Values []*regexp.Regexp
 	Texts  []string
 }
 
 // Set is flag.Value.Set
 func (fv *Regexps) Set(v string) error {
-	re, err := regexp.Compile(v)
+	var err error
+	var re *regexp.Regexp
+	if fv.POSIX {
+		re, err = regexp.CompilePOSIX(v)
+	} else {
+		re, err = regexp.Compile(v)
+	}
 	if err != nil {
 		return err
 	}

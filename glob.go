@@ -8,14 +8,23 @@ import (
 )
 
 // Glob is a `flag.Value` for glob syntax arguments.
+// By default, `filepath.Separator` is used as a separator.
+// If `Separators` is non-nil, its elements are used as separators.
+// To have no separators, set `Separators` to a (non-nil) pointer to an empty slice.
 type Glob struct {
+	Separators *[]rune
+
 	Value glob.Glob
 	Text  string
 }
 
 // Set is flag.Value.Set
 func (fv *Glob) Set(v string) error {
-	g, err := glob.Compile(v, filepath.Separator)
+	separators := fv.Separators
+	if separators == nil {
+		separators = &[]rune{filepath.Separator}
+	}
+	g, err := glob.Compile(v, (*separators)...)
 	if err != nil {
 		return err
 	}
@@ -29,14 +38,23 @@ func (fv *Glob) String() string {
 }
 
 // Globs is a `flag.Value` for glob syntax arguments.
+// By default, `filepath.Separator` is used as a separator.
+// If `Separators` is non-nil, its elements are used as separators.
+// To have no separators, set `Separators` to a (non-nil) pointer to an empty slice.
 type Globs struct {
+	Separators *[]rune
+
 	Values []glob.Glob
 	Texts  []string
 }
 
 // Set is flag.Value.Set
 func (fv *Globs) Set(v string) error {
-	g, err := glob.Compile(v, filepath.Separator)
+	separators := fv.Separators
+	if separators == nil {
+		separators = &[]rune{filepath.Separator}
+	}
+	g, err := glob.Compile(v, (*separators)...)
 	if err != nil {
 		return err
 	}
