@@ -106,10 +106,19 @@ Here's a compact overview:
 | [Regexps](https://godoc.org/github.com/sgreben/flagvar#Regexps)       | [a-z]+          | []*regexp.Regexp                            |
 | [Strings](https://godoc.org/github.com/sgreben/flagvar#Strings)     | "xyxy"             | []string                             |
 | [StringSet](https://godoc.org/github.com/sgreben/flagvar#StringSet)  | "xyxy"             | []string                             |
+| [TCPAddr](https://godoc.org/github.com/sgreben/flagvar#TCPAddr)        | 127.0.0.1:10               | net.TCPAddr                              |
+| [TCPAddrs](https://godoc.org/github.com/sgreben/flagvar#TCPAddrs)        | 127.0.0.1:10               | []net.TCPAddr                              |
+| [TCPAddrsCSV](https://godoc.org/github.com/sgreben/flagvar#TCPAddrsCSV)        | 127.0.0.1:10,:123               | []net.TCPAddr                              |
 | [Template](https://godoc.org/github.com/sgreben/flagvar#Template)    | "{{.Size}}"        | *template.Template                   |
 | [Templates](https://godoc.org/github.com/sgreben/flagvar#Templates)   | "{{.Size}}"        | []*template.Template                 |
 | [Time](https://godoc.org/github.com/sgreben/flagvar#Time)        | "10:30 AM"         | time.Time                            |
 | [Times](https://godoc.org/github.com/sgreben/flagvar#Times)       | "10:30 AM"         | []time.Time                          |
+| [UDPAddr](https://godoc.org/github.com/sgreben/flagvar#UDPAddr)        | 127.0.0.1:10               | net.UDPAddr                              |
+| [UDPAddrs](https://godoc.org/github.com/sgreben/flagvar#UDPAddrs)        | 127.0.0.1:10               | []net.UDPAddr                              |
+| [UDPAddrsCSV](https://godoc.org/github.com/sgreben/flagvar#UDPAddrsCSV)        | 127.0.0.1:10,:123               | []net.UDPAddr                              |
+| [UnixAddr](https://godoc.org/github.com/sgreben/flagvar#UnixAddr)        | /example.sock               | net.UnixAddr                              |
+| [UnixAddrs](https://godoc.org/github.com/sgreben/flagvar#UnixAddrs)        | /example.sock               | []net.UnixAddr                              |
+| [UnixAddrsCSV](https://godoc.org/github.com/sgreben/flagvar#UnixAddrsCSV)        | /example.sock,/other.sock               | []net.UnixAddr                              |
 | [URL](https://godoc.org/github.com/sgreben/flagvar#URL)         | https://github.com | *url.URL                             |
 | [URLs](https://godoc.org/github.com/sgreben/flagvar#URLs)        | https://github.com | []*url.URL                           |
 | [Wrap](https://godoc.org/github.com/sgreben/flagvar#Wrap)        |                    |                                      |
