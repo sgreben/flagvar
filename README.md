@@ -33,22 +33,22 @@ Or just copy & paste what you need. It's public domain.
 package main
 
 import (
-    "flag"
-    "fmt"
-    "github.com/sgreben/flagvar"
+	"flag"
+	"fmt"
+	"github.com/sgreben/flagvar"
 )
 
 var (
-    fruit    = flagvar.Enum{Choices: []string{"apple","banana"}}
-    urls     flagvar.URLs
-    settings flagvar.Assignments
+	fruit    = flagvar.Enum{Choices: []string{"apple", "banana"}}
+	urls     flagvar.URLs
+	settings flagvar.Assignments
 )
 
 func main() {
-    flag.Var(&fruit, "fruit", fmt.Sprintf("set a fruit %v", fruit.Choices))
-    flag.Var(&urls, "url", "add a URL")
-    flag.Var(&settings, "set", "set key=value")
-    flag.Parse()
+	flag.Var(&fruit, "fruit", fmt.Sprintf("set a fruit (%s)", fruit.Help()))
+	flag.Var(&urls, "url", "add a URL")
+	flag.Var(&settings, "set", fmt.Sprintf("specify a setting (%s)", settings.Help()))
+	flag.Parse()
 }
 ```
 
@@ -59,8 +59,17 @@ $ go run main.go -set abc=xyz -url https://github.com
 $ go run main.go -set abc=xyz -url ://github.com
 invalid value "://github.com" for flag -url: parse ://github.com: missing protocol scheme
 
-$ go run /tmp/main.go -fruit kiwi
+$ go run main.go -fruit kiwi
 invalid value "kiwi" for flag -fruit: "kiwi" must be one of [apple banana]
+
+$ go run main.go -h
+Usage:
+  -fruit value
+        set a fruit (one of [apple banana])
+  -set value
+        specify a setting (a key/value pair KEY=VALUE)
+  -url value
+        add a URL
 ```
 
 ## Conventions
