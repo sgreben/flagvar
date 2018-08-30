@@ -1,6 +1,7 @@
 package flagvar
 
 import (
+	"fmt"
 	"sort"
 	"strings"
 )
@@ -46,4 +47,50 @@ func (fv *StringSet) Set(v string) error {
 
 func (fv *StringSet) String() string {
 	return strings.Join(fv.Values(), ",")
+}
+
+// StringSetCSV is a `flag.Value` for comma-separated string arguments.
+// If `Accumulate` is set, the values of all instances of the flag are accumulated.
+// The `Separator` field is used instead of the comma when set.
+// If `CaseSensitive` is set to `true` (default `false`), the comparison is case-sensitive.
+type StringSetCSV struct {
+	Separator  string
+	Accumulate bool
+
+	Value  map[string]bool
+	Values []string
+}
+
+// Help returns a string suitable for inclusion in a flag help message.
+func (fv *StringSetCSV) Help() string {
+	separator := ","
+	if fv.Separator != "" {
+		separator = fv.Separator
+	}
+	return fmt.Sprintf("%q-separated list of strings", separator)
+}
+
+// Set is flag.Value.Set
+func (fv *StringSetCSV) Set(v string) error {
+	separator := fv.Separator
+	if separator == "" {
+		separator = ","
+	}
+	if !fv.Accumulate || fv.Value == nil {
+		fv.Value = make(map[string]bool)
+	}
+	parts := strings.Split(v, separator)
+	for _, part := range parts {
+		part = strings.TrimSpace(part)
+		if fv.Value[part] {
+			continue
+		}
+		fv.Value[part] = true
+		fv.Values = append(fv.Values, part)
+	}
+	return nil
+}
+
+func (fv *StringSetCSV) String() string {
+	return strings.Join(fv.Values, ",")
 }

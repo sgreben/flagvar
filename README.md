@@ -1,8 +1,8 @@
-# flagvar 
+# flagvar
 
 [![](https://godoc.org/github.com/sgreben/flagvar?status.svg)](http://godoc.org/github.com/sgreben/flagvar) [![](https://goreportcard.com/badge/github.com/sgreben/flagvar/goreportcard)](https://goreportcard.com/report/github.com/sgreben/flagvar) [![cover.run](https://cover.run/go/github.com/sgreben/flagvar.svg?style=flat&tag=golang-1.10)](https://cover.run/go?tag=golang-1.10&repo=github.com%2Fsgreben%2Fflagvar) [![Build Status](https://travis-ci.org/sgreben/flagvar.svg?branch=master)](https://travis-ci.org/sgreben/flagvar)
 
-A collection of CLI argument types for the `flag` package. 
+A collection of CLI argument types for the `flag` package.
 
 ```go
 import "github.com/sgreben/flagvar"
@@ -16,7 +16,7 @@ import "github.com/sgreben/flagvar/enum"
 var enums flagvar.EnumsCSV
 ```
 
-Or just copy & paste what you need. It's public domain. 
+Or just copy & paste what you need. It's public domain.
 
 <!-- TOC -->
 
@@ -53,7 +53,7 @@ func main() {
 ```
 
 ```sh
-$ go run main.go -set abc=xyz -url https://github.com 
+$ go run main.go -set abc=xyz -url https://github.com
 # no error
 
 $ go run main.go -set abc=xyz -url ://github.com
@@ -116,6 +116,7 @@ Here's a compact overview:
 | [Regexps](https://godoc.org/github.com/sgreben/flagvar#Regexps)       | [a-z]+          | []*regexp.Regexp                            |
 | [Strings](https://godoc.org/github.com/sgreben/flagvar#Strings)     | "xyxy"             | []string                             |
 | [StringSet](https://godoc.org/github.com/sgreben/flagvar#StringSet)  | "xyxy"             | []string                             |
+| [StringSetCSV](https://godoc.org/github.com/sgreben/flagvar#StringSetCSV)       | y,x,y              | []string                             |
 | [TCPAddr](https://godoc.org/github.com/sgreben/flagvar#TCPAddr)        | 127.0.0.1:10               | net.TCPAddr                              |
 | [TCPAddrs](https://godoc.org/github.com/sgreben/flagvar#TCPAddrs)        | 127.0.0.1:10               | []net.TCPAddr                              |
 | [TCPAddrsCSV](https://godoc.org/github.com/sgreben/flagvar#TCPAddrsCSV)        | 127.0.0.1:10,:123               | []net.TCPAddr                              |

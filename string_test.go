@@ -35,3 +35,31 @@ func TestStringSet(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestStringSetCSV(t *testing.T) {
+	fv := flagvar.StringSetCSV{Accumulate: true}
+	var fs flag.FlagSet
+	fs.Var(&fv, "string-set-csv", "")
+
+	err := fs.Parse([]string{"-string-set-csv", "first,second", "-string-set-csv", "first"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Values, []string{"first", "second"}) {
+		t.Fail()
+	}
+}
+
+func TestStringSetCSVSeparator(t *testing.T) {
+	fv := flagvar.StringSetCSV{Separator: ";", Accumulate: true}
+	var fs flag.FlagSet
+	fs.Var(&fv, "string-set-csv", "")
+
+	err := fs.Parse([]string{"-string-set-csv", "first;second", "-string-set-csv", "first"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Values, []string{"first", "second"}) {
+		t.Fail()
+	}
+}
