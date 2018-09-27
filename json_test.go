@@ -47,6 +47,28 @@ func TestJSONs(t *testing.T) {
 	}
 }
 
+func TestJSONsValue(t *testing.T) {
+	type example struct {
+		A string
+		B int
+	}
+	fv := flagvar.JSONs{
+		Value: func() interface{} {
+			return &example{}
+		},
+	}
+	var fs flag.FlagSet
+	fs.Var(&fv, "json", "")
+
+	err := fs.Parse([]string{"-json", `{"A":"abc","B":123}`})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Values, []interface{}{&example{A: "abc", B: 123}}) {
+		t.Fail()
+	}
+}
+
 func TestJSONsFail(t *testing.T) {
 	fv := flagvar.JSONs{}
 	var fs flag.FlagSet

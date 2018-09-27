@@ -26,8 +26,9 @@ func (fv *JSON) String() string {
 	return fv.Text
 }
 
-// JSONs is a `flag.Value` for JSON arguments.
+// JSONs is a `flag.Value` for JSON arguments. If non-nil, the `Value` field is used to generate template values.
 type JSONs struct {
+	Value  func() interface{}
 	Values []interface{}
 	Texts  []string
 }
@@ -38,9 +39,14 @@ func (fv *JSONs) Help() string {
 }
 
 // Set is flag.Value.Set
-func (fv *JSONs) Set(v string) error {
+func (fv *JSONs) Set(v string) (err error) {
 	var value interface{}
-	err := json.Unmarshal([]byte(v), &value)
+	if fv.Value != nil {
+		value = fv.Value()
+		err = json.Unmarshal([]byte(v), value)
+	} else {
+		err = json.Unmarshal([]byte(v), &value)
+	}
 	if err == nil {
 		fv.Texts = append(fv.Texts, v)
 		fv.Values = append(fv.Values, value)
