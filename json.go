@@ -19,7 +19,10 @@ func (fv *JSON) Help() string {
 // Set is flag.Value.Set
 func (fv *JSON) Set(v string) error {
 	fv.Text = v
-	return json.Unmarshal([]byte(v), &fv.Value)
+	if fv.Value == nil {
+		return json.Unmarshal([]byte(v), &fv.Value)
+	}
+	return json.Unmarshal([]byte(v), fv.Value)
 }
 
 func (fv *JSON) String() string {
