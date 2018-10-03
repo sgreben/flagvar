@@ -8,6 +8,55 @@ import (
 	"github.com/sgreben/flagvar"
 )
 
+func TestFloat(t *testing.T) {
+	fv := flagvar.Float{}
+	var fs flag.FlagSet
+	fs.Var(&fv, "float", "")
+
+	err := fs.Parse([]string{"-float", "1.5"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Value, float64(1.5)) {
+		t.Fail()
+	}
+}
+
+func TestFloatHelp(t *testing.T) {
+	fv := flagvar.Float{BitSize: 64}
+	if !reflect.DeepEqual(fv.Help(), "a 64-bit float") {
+		t.Fail()
+	}
+	fv = flagvar.Float{BitSize: 32}
+	if !reflect.DeepEqual(fv.Help(), "a 32-bit float") {
+		t.Fail()
+	}
+}
+
+func TestFloatBitSize(t *testing.T) {
+	fv := flagvar.Float{BitSize: 64}
+	var fs flag.FlagSet
+	fs.Var(&fv, "float", "")
+
+	err := fs.Parse([]string{"-float", "1.234"})
+	if err != nil {
+		t.Fail()
+	}
+	if !reflect.DeepEqual(fv.Value, float64(1.234)) {
+		t.Fail()
+	}
+}
+
+func TestFloatFail(t *testing.T) {
+	fv := flagvar.Float{}
+	var fs flag.FlagSet
+	fs.Var(&fv, "float", "")
+
+	err := fs.Parse([]string{"-float", "abc"})
+	if err == nil {
+		t.Fail()
+	}
+}
 func TestFloats(t *testing.T) {
 	fv := flagvar.Floats{}
 	var fs flag.FlagSet
