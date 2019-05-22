@@ -114,3 +114,14 @@ func TestTemplatesFail(t *testing.T) {
 		t.Fail()
 	}
 }
+
+func TestTemplateFile(t *testing.T) {
+	fv := flagvar.TemplateFile{}
+	var fs flag.FlagSet
+	fs.Var(&fv, "template", "")
+
+	err := fs.Parse([]string{"-template", "./noSuchFile.tpl"})
+	if err == nil {
+		t.Fail()
+	}
+}
