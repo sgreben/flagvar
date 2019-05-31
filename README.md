@@ -122,6 +122,7 @@ Here's a compact overview:
 | [TCPAddrsCSV](https://godoc.org/github.com/sgreben/flagvar#TCPAddrsCSV)        | 127.0.0.1:10,:123               | []net.TCPAddr                              |
 | [Template](https://godoc.org/github.com/sgreben/flagvar#Template)    | "{{.Size}}"        | *template.Template                   |
 | [Templates](https://godoc.org/github.com/sgreben/flagvar#Templates)   | "{{.Size}}"        | []*template.Template                 |
+| [TemplateFile](https://godoc.org/github.com/sgreben/flagvar#TemplateFile)   | "{{.Size}}"        | String                 |
 | [Time](https://godoc.org/github.com/sgreben/flagvar#Time)        | "10:30 AM"         | time.Time                            |
 | [Times](https://godoc.org/github.com/sgreben/flagvar#Times)       | "10:30 AM"         | []time.Time                          |
 | [UDPAddr](https://godoc.org/github.com/sgreben/flagvar#UDPAddr)        | 127.0.0.1:10               | net.UDPAddr                              |
