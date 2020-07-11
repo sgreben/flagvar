@@ -1,6 +1,6 @@
 # flagvar
 
-[![](https://godoc.org/github.com/sgreben/flagvar?status.svg)](http://godoc.org/github.com/sgreben/flagvar) ![Test](https://github.com/keilerkonzept/aws-secretsmanager-files/workflows/Test/badge.svg) [![](https://goreportcard.com/badge/github.com/sgreben/flagvar/goreportcard)](https://goreportcard.com/report/github.com/sgreben/flagvar)
+[![](https://godoc.org/github.com/sgreben/flagvar?status.svg)](http://godoc.org/github.com/sgreben/flagvar) ![Test](https://github.com/sgreben/flagvar/workflows/Test/badge.svg) [![](https://goreportcard.com/badge/github.com/sgreben/flagvar/goreportcard)](https://goreportcard.com/report/github.com/sgreben/flagvar)
 
 A collection of CLI argument types for the `flag` package.
 
