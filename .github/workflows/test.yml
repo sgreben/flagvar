@@ -1,0 +1,10 @@
+name: Test
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    container:
+      image: golang:1.13.11-alpine3.10
+    steps:
+      - name: Test
+        run: go test ./...

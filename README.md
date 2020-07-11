@@ -1,19 +1,11 @@
 # flagvar
 
-[![](https://godoc.org/github.com/sgreben/flagvar?status.svg)](http://godoc.org/github.com/sgreben/flagvar) [![](https://goreportcard.com/badge/github.com/sgreben/flagvar/goreportcard)](https://goreportcard.com/report/github.com/sgreben/flagvar) [![coverage](http://gocover.io/_badge/github.com/sgreben/flagvar)](https://gocover.io/github.com/sgreben/flagvar) [![Build Status](https://travis-ci.org/sgreben/flagvar.svg?branch=master)](https://travis-ci.org/sgreben/flagvar)
+[![](https://godoc.org/github.com/sgreben/flagvar?status.svg)](http://godoc.org/github.com/sgreben/flagvar) ![Test](https://github.com/keilerkonzept/aws-secretsmanager-files/workflows/Test/badge.svg) [![](https://goreportcard.com/badge/github.com/sgreben/flagvar/goreportcard)](https://goreportcard.com/report/github.com/sgreben/flagvar)
 
 A collection of CLI argument types for the `flag` package.
 
 ```go
 import "github.com/sgreben/flagvar"
-```
-
-Each group of types (`Enum*`, `URL*`, `IP*`, ...) is also available as a separate package (also named `flagvar`), for example:
-
-```go
-import "github.com/sgreben/flagvar/enum"
-
-var enums flagvar.EnumsCSV
 ```
 
 Or just copy & paste what you need. It's public domain.
