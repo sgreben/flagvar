@@ -13,12 +13,12 @@ func TestTimeFormatISO8601(t *testing.T) {
 	var fs flag.FlagSet
 	fs.Var(&fv, "time-format", "")
 
-	err := fs.Parse([]string{"-time-format", "ISO8601"})
+	err := fs.Parse([]string{"-time-format", "RFC3339"})
 	if err != nil {
 		t.Error(err)
 	}
 	referenceTime := time.Unix(1594467527, 0)
-	expected := "2020-07-11T13:38:47+02:00"
+	expected := referenceTime.Format(time.RFC3339)
 	actual := referenceTime.Format(fv.Value)
 	if actual != expected {
 		t.Errorf("actual %q != %q (expected)", actual, expected)
